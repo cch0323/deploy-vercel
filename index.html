@@ -1,722 +1,414 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>记忆配对 · 翻牌小游戏</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%232E8B7A'/%3E%3Cpath d='M7 17c0-6 4-9 10-10-1 6-4 10-10 10z' fill='none' stroke='white' stroke-width='1.6' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#F4F6F5;
+    --surface:#FFFFFF;
+    --ink:#1E2926;
+    --muted:#6B7773;
+    --line:#E3E9E7;
+    --accent:#2E8B7A;
+    --accent-deep:#236F62;
+    --accent-soft:#DCEEE9;
+    --back-a:#D7E6E2;
+    --back-b:#C7DCD6;
+    --success:#C9E8DD;
+    --warn:#F1D9D3;
+    --shadow:0 10px 28px rgba(30,41,38,.10);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    min-height:100vh;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    line-height:1.5;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:28px 18px 48px;
+  }
+  .wrap{width:100%;max-width:600px}
+
+  /* ===== 头部 ===== */
+  header{text-align:center;margin-bottom:22px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;letter-spacing:.14em;color:var(--accent);
+    background:var(--accent-soft);border-radius:999px;
+    padding:6px 14px;margin-bottom:14px;
+  }
+  .eyebrow::before,.eyebrow::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--accent)}
+  h1{font-size:30px;font-weight:800;letter-spacing:.02em}
+  .sub{margin-top:8px;color:var(--muted);font-size:15px}
+
+  /* ===== 统计与控制条 ===== */
+  .panel{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:16px 18px;margin-bottom:18px;
+  }
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+  .stat{text-align:center}
+  .stat .num{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+  .stat .label{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+  .levels{display:flex;gap:6px;background:var(--bg);border-radius:12px;padding:4px}
+  .levels button{
+    border:0;background:transparent;color:var(--muted);
+    font:inherit;font-size:14px;padding:8px 14px;border-radius:9px;cursor:pointer;
+    transition:background .2s,color .2s;
+  }
+  .levels button.active{background:var(--surface);color:var(--accent-deep);font-weight:600;box-shadow:0 2px 8px rgba(30,41,38,.08)}
+  .restart{
+    border:1.5px solid var(--line);background:var(--surface);color:var(--ink);
+    font:inherit;font-size:14px;font-weight:600;padding:9px 16px;border-radius:12px;cursor:pointer;
+    display:inline-flex;align-items:center;gap:7px;transition:border-color .2s,color .2s;
+  }
+  .restart:hover{border-color:var(--accent);color:var(--accent-deep)}
+  .restart svg{width:16px;height:16px}
+
+  /* ===== 牌面网格 ===== */
+  .board{display:grid;gap:12px}
+  .board[data-level="easy"]{grid-template-columns:repeat(3,1fr)}
+  .board[data-level="normal"]{grid-template-columns:repeat(4,1fr)}
+  .board[data-level="hard"]{grid-template-columns:repeat(4,1fr)}
+  @media (min-width:600px){
+    .board[data-level="easy"]{grid-template-columns:repeat(4,1fr)}
+    .board[data-level="normal"]{grid-template-columns:repeat(4,1fr)}
+    .board[data-level="hard"]{grid-template-columns:repeat(6,1fr)}
+  }
+
+  .card{aspect-ratio:1;perspective:700px;cursor:pointer;min-height:44px}
+  .card-inner{
+    position:relative;width:100%;height:100%;
+    transform-style:preserve-3d;transition:transform .42s cubic-bezier(.4,.1,.2,1);
+  }
+  .card.flipped .card-inner{transform:rotateY(180deg)}
+  .face{
+    position:absolute;inset:0;border-radius:16px;
+    display:flex;align-items:center;justify-content:center;
+    backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  }
+  .face.back{
+    background:linear-gradient(135deg,var(--back-a),var(--back-b));
+    border:1px solid rgba(255,255,255,.6);
+    box-shadow:0 4px 12px rgba(30,41,38,.08);
+  }
+  .face.back .mark{width:34%;height:34%;border:2px solid rgba(255,255,255,.75);border-radius:10px;opacity:.85}
+  .face.front{
+    background:var(--surface);border:1px solid var(--line);
+    transform:rotateY(180deg);color:var(--accent-deep);
+  }
+  .face.front svg{width:52%;height:52%}
+  .card.matched .face.front{background:var(--success);border-color:#B7DFD2}
+  .card.matched{cursor:default}
+  .card.matched .face.front svg{color:var(--accent-deep)}
+  .card.wrong .face.front{background:var(--warn);border-color:#E8C4BC}
+  .card:hover:not(.matched):not(.flipped) .face.back{filter:brightness(1.03)}
+
+  /* ===== 胜利浮层 ===== */
+  .overlay{
+    position:fixed;inset:0;background:rgba(30,41,38,.45);
+    display:flex;align-items:center;justify-content:center;padding:20px;
+    opacity:0;pointer-events:none;transition:opacity .25s;z-index:20;
+  }
+  .overlay.show{opacity:1;pointer-events:auto}
+  .modal{
+    background:var(--surface);border-radius:24px;max-width:380px;width:100%;
+    padding:32px 28px;text-align:center;box-shadow:var(--shadow);
+    transform:translateY(12px);transition:transform .25s;
+  }
+  .overlay.show .modal{transform:translateY(0)}
+  .modal .badge{
+    width:64px;height:64px;border-radius:50%;background:var(--accent-soft);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 16px;color:var(--accent-deep);
+  }
+  .modal .badge svg{width:32px;height:32px}
+  .modal h2{font-size:24px;font-weight:800;margin-bottom:6px}
+  .modal .praise{color:var(--muted);font-size:15px;margin-bottom:18px}
+  .stars{display:flex;justify-content:center;gap:6px;margin-bottom:18px}
+  .stars svg{width:26px;height:26px;color:#D9DEDC}
+  .stars svg.on{color:#E8A93B}
+  .result{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+  .result .cell{background:var(--bg);border-radius:14px;padding:12px}
+  .result .cell .num{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+  .result .cell .label{font-size:12.5px;color:var(--muted)}
+  .primary{
+    width:100%;border:0;background:var(--accent);color:#fff;font:inherit;
+    font-size:16px;font-weight:600;padding:13px;border-radius:14px;cursor:pointer;
+    transition:background .2s;
+  }
+  .primary:hover{background:var(--accent-deep)}
+
+  footer{margin-top:26px;text-align:center;color:var(--muted);font-size:13px}
+
+  @media (max-width:560px){
+    body{padding:20px 14px 40px}
+    h1{font-size:25px}
+    .stat .num{font-size:19px}
+    .panel{padding:14px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .card-inner,.overlay,.modal{transition:none}
+  }
+</style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">翻牌记忆游戏</span>
+    <h1>记忆配对</h1>
+    <p class="sub">翻开两张卡片，找出图案相同的一对，全部配对即获胜。</p>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
+  <section class="panel" aria-label="游戏状态">
+    <div class="stats">
+      <div class="stat"><div class="num" id="moves">0</div><div class="label">步数</div></div>
+      <div class="stat"><div class="num" id="matched">0 / 0</div><div class="label">已配对</div></div>
+      <div class="stat"><div class="num" id="timer">00:00</div><div class="label">用时</div></div>
+    </div>
+    <div class="toolbar">
+      <div class="levels" role="tablist" aria-label="难度选择">
+        <button data-level="easy" role="tab">简单</button>
+        <button data-level="normal" class="active" role="tab">标准</button>
+        <button data-level="hard" role="tab">困难</button>
+      </div>
+      <button class="restart" id="restartBtn" aria-label="重新开始">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
+        重新开始
+      </button>
+    </div>
+  </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <section class="board" id="board" data-level="normal" aria-label="牌面"></section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer>提示：记住每张图案的位置，用更少步数完成挑战。</footer>
+</div>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+<!-- 胜利浮层 -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="游戏完成">
+  <div class="modal">
+    <div class="badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <h2>配对完成</h2>
+    <p class="praise" id="praise">记忆力很不错！</p>
+    <div class="stars" id="stars" aria-label="评分"></div>
+    <div class="result">
+      <div class="cell"><div class="num" id="finalTime">00:00</div><div class="label">用时</div></div>
+      <div class="cell"><div class="num" id="finalMoves">0</div><div class="label">步数</div></div>
+    </div>
+    <button class="primary" id="againBtn">再来一局</button>
+  </div>
+</div>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+<script>
+(function(){
+  "use strict";
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+  /* ===== 图标库（内联 SVG，12 个） ===== */
+  var ICONS = [
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19C5 10 10 5 20 4c-1 10-6 15-15 15z"/><path d="M5 19c3-4 7-8 11-10"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 18a4.5 4.5 0 0 0 .5-8.97A6 6 0 0 0 6.3 9.5 3.5 3.5 0 0 0 7 18z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-9-9c-1.5-3.5 1-7 4.5-7 2 0 3.5 1.2 4.5 2.7C13 5.2 14.5 4 16.5 4 20 4 22.5 7.5 21 11c-2 4.5-9 9-9 9z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2.5-3 5.5-3 8 0s5.5 3 8 0"/><path d="M2 17c2.5-3 5.5-3 8 0s5.5 3 8 0"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.2"/><circle cx="12" cy="6.2" r="2.4"/><circle cx="12" cy="17.8" r="2.4"/><circle cx="6.2" cy="12" r="2.4"/><circle cx="17.8" cy="12" r="2.4"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M11 12 20 3"/><path d="M16 7l2 2"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M12 7v13"/><path d="M5 13c0 5 3 7 7 7s7-2 7-7"/><path d="M3 16l2-3 2 3M19 16l-2-3-2 3"/></svg>',
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 0 1 9 9H3a9 9 0 0 1 9-9z"/><path d="M12 12v7"/><path d="M12 19a2 2 0 0 0 4 0"/></svg>'
+  ];
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
+  var LEVELS = {
+    easy:   { pairs:6,  label:"简单" },
+    normal: { pairs:8,  label:"标准" },
+    hard:   { pairs:12, label:"困难" }
+  };
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+  var board = document.getElementById("board");
+  var movesEl = document.getElementById("moves");
+  var matchedEl = document.getElementById("matched");
+  var timerEl = document.getElementById("timer");
+  var overlay = document.getElementById("overlay");
+  var starsEl = document.getElementById("stars");
+  var praiseEl = document.getElementById("praise");
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+  var state = {
+    level:"normal",
+    deck:[],
+    first:null,
+    second:null,
+    lock:false,
+    moves:0,
+    matched:0,
+    seconds:0,
+    timerId:null,
+    started:false
+  };
+
+  function shuffle(arr){
+    for(var i=arr.length-1;i>0;i--){
+      var j=Math.floor(Math.random()*(i+1));
+      var t=arr[i];arr[i]=arr[j];arr[j]=t;
+    }
+    return arr;
+  }
+
+  function fmt(sec){
+    var m=Math.floor(sec/60), s=sec%60;
+    return (m<10?"0"+m:m)+":"+(s<10?"0"+s:s);
+  }
+
+  function startTimer(){
+    if(state.started) return;
+    state.started=true;
+    state.timerId=setInterval(function(){
+      state.seconds++;
+      timerEl.textContent=fmt(state.seconds);
+    },1000);
+  }
+
+  function stopTimer(){
+    if(state.timerId){clearInterval(state.timerId);state.timerId=null;}
+  }
+
+  function reset(level){
+    state.level=level||state.level;
+    stopTimer();
+    state.deck=[];state.first=null;state.second=null;state.lock=false;
+    state.moves=0;state.matched=0;state.seconds=0;state.started=false;
+
+    var pairs=LEVELS[state.level].pairs;
+    var chosen=shuffle(ICONS.slice()).slice(0,pairs);
+    chosen.forEach(function(icon,idx){
+      state.deck.push({icon:icon,key:idx});
+      state.deck.push({icon:icon,key:idx});
+    });
+    shuffle(state.deck);
+
+    movesEl.textContent="0";
+    matchedEl.textContent="0 / "+pairs;
+    timerEl.textContent="00:00";
+    board.dataset.level=state.level;
+    overlay.classList.remove("show");
+    render();
+  }
+
+  function render(){
+    board.innerHTML="";
+    state.deck.forEach(function(card,idx){
+      var el=document.createElement("div");
+      el.className="card";
+      el.dataset.index=idx;
+      el.dataset.key=card.key;
+      el.setAttribute("role","button");
+      el.setAttribute("aria-label","未翻开的卡片");
+      el.innerHTML=
+        '<div class="card-inner">'+
+          '<div class="face back"><div class="mark"></div></div>'+
+          '<div class="face front">'+card.icon+'</div>'+
+        '</div>';
+      board.appendChild(el);
+    });
+  }
+
+  function updateStats(){
+    movesEl.textContent=state.moves;
+    matchedEl.textContent=state.matched+" / "+LEVELS[state.level].pairs;
+  }
+
+  function onCardClick(e){
+    var card=e.target.closest(".card");
+    if(!card||state.lock) return;
+    if(card.classList.contains("flipped")||card.classList.contains("matched")) return;
+
+    startTimer();
+    card.classList.add("flipped");
+    card.setAttribute("aria-label","已翻开的卡片");
+
+    if(!state.first){
+      state.first=card;
+      return;
+    }
+    state.second=card;
+    state.moves++;
+    state.lock=true;
+    updateStats();
+
+    var match=state.first.dataset.key===state.second.dataset.key;
+    if(match){
+      setTimeout(function(){
+        state.first.classList.add("matched");
+        state.second.classList.add("matched");
+        state.first.setAttribute("aria-label","已配对的卡片");
+        state.second.setAttribute("aria-label","已配对的卡片");
+        state.matched++;
+        updateStats();
+        state.first=null;state.second=null;state.lock=false;
+        if(state.matched===LEVELS[state.level].pairs) win();
+      },360);
+    }else{
+      state.first.classList.add("wrong");
+      state.second.classList.add("wrong");
+      setTimeout(function(){
+        state.first.classList.remove("flipped","wrong");
+        state.second.classList.remove("flipped","wrong");
+        state.first.setAttribute("aria-label","未翻开的卡片");
+        state.second.setAttribute("aria-label","未翻开的卡片");
+        state.first=null;state.second=null;state.lock=false;
+      },760);
+    }
+  }
+
+  function win(){
+    stopTimer();
+    var pairs=LEVELS[state.level].pairs;
+    var ratio=state.moves/pairs;
+    var stars=ratio<=1.6?3:ratio<=2.6?2:1;
+    var praise=stars===3?"过目不忘，记忆力惊人！":stars===2?"表现出色，继续保持！":"完成挑战，再来一局冲高分！";
+
+    document.getElementById("finalTime").textContent=fmt(state.seconds);
+    document.getElementById("finalMoves").textContent=state.moves;
+    praiseEl.textContent=praise;
+
+    starsEl.innerHTML="";
+    for(var i=0;i<3;i++){
+      var svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+      svg.setAttribute("viewBox","0 0 24 24");
+      svg.setAttribute("fill","currentColor");
+      svg.innerHTML='<path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.3 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/>';
+      if(i<stars) svg.classList.add("on");
+      starsEl.appendChild(svg);
+    }
+    setTimeout(function(){overlay.classList.add("show");},400);
+  }
+
+  /* ===== 事件绑定 ===== */
+  board.addEventListener("click",onCardClick);
+
+  document.querySelectorAll(".levels button").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      document.querySelectorAll(".levels button").forEach(function(b){b.classList.remove("active");});
+      btn.classList.add("active");
+      reset(btn.dataset.level);
+    });
+  });
+
+  document.getElementById("restartBtn").addEventListener("click",function(){reset();});
+  document.getElementById("againBtn").addEventListener("click",function(){reset();});
+
+  reset("normal");
+})();
+</script>
 </body>
-
 </html>
